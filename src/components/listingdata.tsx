@@ -6,6 +6,7 @@ interface ImageLoaderProps {
   src: string;
   width: number;
 }
+<<<<<<< HEAD
 interface ListingDataProps {
   page: number | null;
   seller_id: number | null;
@@ -14,6 +15,11 @@ interface ListingDataProps {
 
 const ImageLoader = ({ src, width }: ImageLoaderProps): string => {
   return `${src}?w=${width}&q=${75}`;
+=======
+
+const ImageLoader = ({ src, width }: ImageLoaderProps): string => {
+  return `http://127.0.0.1:8000${src}?w=${width}&q=${75}`;
+>>>>>>> 2a2682fe5fc749d910797aa4aaf4072ba6d4b869
 };
 interface Meta {
   title: string;
@@ -32,6 +38,7 @@ interface ApiResponse {
   previous: string | null;
   results: Meta[];
 }
+<<<<<<< HEAD
 const ListingData: React.FC<ListingDataProps> = ({
   page,
   seller_id,
@@ -44,6 +51,10 @@ const ListingData: React.FC<ListingDataProps> = ({
   const link: string = `http://127.0.0.1:8000/user/${seller_id}/category/${category}/?page=${page}`;
 
   console.log(link);
+=======
+const link: string = "http://127.0.0.1:8000";
+const ListingData: React.FC = () => {
+>>>>>>> 2a2682fe5fc749d910797aa4aaf4072ba6d4b869
   const [data, setData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
@@ -53,7 +64,10 @@ const ListingData: React.FC<ListingDataProps> = ({
       setLoading(true);
       setError(null);
       try {
+<<<<<<< HEAD
         console.log("Fetching data from:", link);
+=======
+>>>>>>> 2a2682fe5fc749d910797aa4aaf4072ba6d4b869
         const response = await fetch(link);
 
         if (!response.ok) {
@@ -61,7 +75,11 @@ const ListingData: React.FC<ListingDataProps> = ({
         }
 
         const result: ApiResponse = await response.json();
+<<<<<<< HEAD
         console.log(result);
+=======
+        //console.log(result);
+>>>>>>> 2a2682fe5fc749d910797aa4aaf4072ba6d4b869
 
         setData(result);
       } catch (err) {
