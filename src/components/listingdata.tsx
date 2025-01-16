@@ -62,6 +62,11 @@ const ListingData: React.FC<ListingDataProps> = ({
 
         const result: ApiResponse = await response.json();
         console.log(result);
+<<<<<<< HEAD
+        console.log(result);
+=======
+        //console.log(result);
+>>>>>>> 2a2682fe5fc749d910797aa4aaf4072ba6d4b869
 
         setData(result);
       } catch (err) {
