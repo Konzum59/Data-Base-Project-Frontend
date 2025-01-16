@@ -58,7 +58,6 @@ export default function LoginPage() {
 
   return (
     <form onSubmit={handleSubmit}>
-<<<<<<< HEAD
       <input
         className=" rounded-md leading-7 "
         type="username"
@@ -79,11 +78,6 @@ export default function LoginPage() {
       >
         Login
       </button>
-=======
-      <input type="username" name="username" placeholder="Username" required />
-      <input type="password" name="password" placeholder="Password" required />
-      <button type="submit">Login</button>
->>>>>>> 2a2682fe5fc749d910797aa4aaf4072ba6d4b869
     </form>
   );
 }
