@@ -41,12 +41,12 @@ const ListingData: React.FC<ListingDataProps> = ({
   category = category ? category : 0;
   seller_id = seller_id ? seller_id : 0;
 
-  const link: string = `http://127.0.0.1:8000/user/${seller_id}/category/${category}/?page=${page}`;
-
-  console.log(link);
   const [data, setData] = useState<ApiResponse | null>(null);
   const [loading, setLoading] = useState<boolean>(false);
   const [error, setError] = useState<string | null>(null);
+  const [currentPage, setCurrentPage] = useState(page);
+  const link: string = `http://127.0.0.1:8000/user/${seller_id}/category/${category}/?page=${currentPage}`;
+  console.log(link);
 
   useEffect(() => {
     const fetchData = async () => {
@@ -62,11 +62,7 @@ const ListingData: React.FC<ListingDataProps> = ({
 
         const result: ApiResponse = await response.json();
         console.log(result);
-<<<<<<< HEAD
         console.log(result);
-=======
-        //console.log(result);
->>>>>>> 2a2682fe5fc749d910797aa4aaf4072ba6d4b869
 
         setData(result);
       } catch (err) {
@@ -76,7 +72,19 @@ const ListingData: React.FC<ListingDataProps> = ({
       }
     };
     fetchData();
-  }, []);
+  }, [link]);
+
+  const handleNextPage = () => {
+    if (data && data.next) {
+      setCurrentPage(currentPage + 1);
+    }
+  };
+
+  const handlePrevPage = () => {
+    if (data && data.previous) {
+      setCurrentPage(currentPage - 1);
+    }
+  };
   if (loading) {
     return <div>Loading...</div>;
   }
@@ -87,9 +95,12 @@ const ListingData: React.FC<ListingDataProps> = ({
     return <div>No listings found.</div>;
   }
   return (
-    <div className="flex flex-col gap-5  ">
+    <div className="flex flex-col gap-5   ">
       {data.results.map((item) => (
-        <div key={item.id}>
+        <div
+          key={item.id}
+          className="border-cyan-600 border-2 rounded-sm bg-cyan-50   "
+        >
           <h2>{item.title}</h2>
           <p>{item.description}</p>
           <p>Price: {item.price} PLN</p>
@@ -110,6 +121,25 @@ const ListingData: React.FC<ListingDataProps> = ({
           )}
         </div>
       ))}
+      <div className="flex justify-between mt-5">
+        <button
+          onClick={handlePrevPage}
+          disabled={!data.previous}
+          className="px-4 py-2 rounded-tr-md text-xl bg-cyan-900 text-white hover:bg-cyan-700 disabled:opacity-50"
+        >
+          Previous
+        </button>
+        <span>
+          Page {currentPage} of {Math.ceil((data.count || 1) / 16)}
+        </span>
+        <button
+          onClick={handleNextPage}
+          disabled={!data.next}
+          className="px-4 py-2  rounded-tl-md text-xl bg-cyan-900 text-white hover:bg-cyan-700 disabled:opacity-50"
+        >
+          Next
+        </button>
+      </div>
     </div>
   );
 };

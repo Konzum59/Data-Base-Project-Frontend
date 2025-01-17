@@ -3,6 +3,7 @@ import Link from "next/link";
 import LoginPage from "./loginPage";
 import { useUser } from "./getUserData";
 import { useState, useEffect } from "react";
+import SignupPage from "./signupPage";
 export function Navbar() {
   const { user, accessToken, setAccessToken } = useUser();
   const [isLogged, setIsLogged] = useState(false);
@@ -18,31 +19,39 @@ export function Navbar() {
         >
           Home
         </Link>
-        <Link
-          href={"/myListings "}
-          className="hover:cursor-pointer hover:bg-cyan-400 rounded-md"
-        >
-          Listings
-        </Link>
-        <Link
-          href={"/myOrders"}
-          className="hover:cursor-pointer hover:bg-cyan-400 rounded-md"
-        >
-          {" "}
-          Orders
-        </Link>
-        <Link
-          href={"/chat"}
-          className="hover:cursor-pointer hover:bg-cyan-400 rounded-md"
-        >
-          Messages
-        </Link>
-        <Link
-          href={"/myAccount"}
-          className="hover:cursor-pointer hover:bg-cyan-400 rounded-md"
-        >
-          My account
-        </Link>
+        {accessToken && (
+          <Link
+            href={"/myListings "}
+            className="hover:cursor-pointer hover:bg-cyan-400 rounded-md"
+          >
+            Listings
+          </Link>
+        )}
+        {accessToken && (
+          <Link
+            href={"/myOrders"}
+            className="hover:cursor-pointer hover:bg-cyan-400 rounded-md"
+          >
+            {" "}
+            Orders
+          </Link>
+        )}
+        {accessToken && (
+          <Link
+            href={"/chat"}
+            className="hover:cursor-pointer hover:bg-cyan-400 rounded-md"
+          >
+            Messages
+          </Link>
+        )}
+        {accessToken && (
+          <Link
+            href={"/myAccount"}
+            className="hover:cursor-pointer hover:bg-cyan-400 rounded-md"
+          >
+            My account
+          </Link>
+        )}
       </div>
       {isLogged ? (
         <>
@@ -58,7 +67,10 @@ export function Navbar() {
           </button>{" "}
         </>
       ) : (
-        <LoginPage />
+        <>
+          <LoginPage />
+          <SignupPage />
+        </>
       )}
     </div>
   );

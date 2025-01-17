@@ -133,72 +133,78 @@ export default function CreateListingForm() {
   return (
     <form
       onSubmit={handleSubmit}
-      className="bg-cyan-500  border-2 rounded-b-md  border-cyan-600 absolute right-0 top-9 p-2"
+      className="bg-cyan-500  border-2 rounded-b-md  border-cyan-600 absolute right-0 top-9 p-2 "
     >
-      <div>Add your listing here</div>
-      <div>
-        <label htmlFor="title">Title:</label>
-        <input
-          type="text"
-          id="title"
-          name="title"
-          value={formData.title}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="description">Description:</label>
-        <textarea
-          id="description"
-          name="description"
-          value={formData.description}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="price">Price:</label>
-        <input
-          type="number"
-          id="price"
-          name="price"
-          value={formData.price}
-          onChange={handleChange}
-          required
-        />
-      </div>
-      <div>
-        <label htmlFor="location">Location:</label>
-        <input
-          type="text"
-          id="location"
-          name="location"
-          value={formData.location}
-          onChange={handleChange}
-          required
-        />
-      </div>
+      <div className="text-xl text-center">Add your listing here</div>
+      <div className="text-right">
+        <div>
+          <label htmlFor="title">Title:</label>
+          <input
+            className="rounded-md m-1"
+            type="text"
+            id="title"
+            name="title"
+            value={formData.title}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="description">Description:</label>
+          <textarea
+            className="rounded-md m-1"
+            id="description"
+            name="description"
+            value={formData.description}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="price">Price:</label>
+          <input
+            className="rounded-md m-1"
+            type="number"
+            id="price"
+            name="price"
+            value={formData.price}
+            onChange={handleChange}
+            required
+          />
+        </div>
+        <div>
+          <label htmlFor="location">Location:</label>
+          <input
+            className="rounded-md m-1"
+            type="text"
+            id="location"
+            name="location"
+            value={formData.location}
+            onChange={handleChange}
+            required
+          />
+        </div>
 
-      <div>
-        <ShowCategory onCategorySelect={handleCategorySelect} />
+        <div>
+          <ShowCategory onCategorySelect={handleCategorySelect} />
+        </div>
+        <div>
+          <label htmlFor="image">Image (not required):</label>
+          <input
+            className="rounded-md m-1"
+            type="file"
+            id="image"
+            name="image"
+            onChange={handleFileChange}
+          />
+        </div>
+        <button
+          className="bg-cyan-900 text-white hover:bg-cyan-700 flex p-1 rounded-md"
+          type="submit"
+        >
+          Add listing
+        </button>
       </div>
-      <div>
-        <label htmlFor="image">Image (not required):</label>
-        <input
-          type="file"
-          id="image"
-          name="image"
-          onChange={handleFileChange}
-        />
-      </div>
-      <button
-        className="bg-cyan-900 text-white hover:bg-cyan-700 flex p-1 rounded-md"
-        type="submit"
-      >
-        Add listing
-      </button>
-
       {error && <p style={{ color: "red" }}>{error}</p>}
       {success && <p style={{ color: "green" }}>Listing added succesfully!</p>}
     </form>
